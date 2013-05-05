@@ -1,0 +1,18 @@
+ul{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+.grid .box{
+    float:left;
+    background:#eee;
+    border:solid white;
+    cursor:pointer;
+}
+
+.row{
+    overflow:hidden;
+    float:right;
+    clear:right;
+}
