@@ -8,7 +8,7 @@ function Debug(){
     if(typeof console === 'undefined'){
         _this_.exec = function(){
             return null;
-        }
+        };
 
         return _this_;
     }
