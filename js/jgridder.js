@@ -1,3 +1,5 @@
+(function(window, $){
+
 function Debug(){
     var _this_ = this,
         env = 'dev';
@@ -36,7 +38,7 @@ function Debug(){
     return _this_;
 }
 
-function Grid(settings){
+window.Grid = function Grid(settings){
     var _this_ = this;
     
     _this_.signature = {
@@ -62,9 +64,11 @@ function Grid(settings){
                 debug.printSignature();              
             return;
         }
-    }    
-    
-   var $container = $('<div class="_this_"/>'),
+    }
+   
+   //>>Settings
+   
+   var $container = $('<div class="grid"/>'),
     $box = $('<li class="box"/>'),
     $row = $('<ul class="row"/>'),
     $boxes = $([]);
@@ -82,33 +86,33 @@ function Grid(settings){
     _this_.rest = null;
 
     //>>Functions
-    _this_.calculate = function calculate(cols, nb){
-        //Computes the dimensions of the rendered _this_
-        var rest = nb % cols,
-        rows = Math.ceil(nb/cols);
-
+    
+    //Computes the dimensions of the rendered grid
+    function calculate(cols, nb){
+        
         _this_.cols = cols;
-        _this_.rows = rows;
-        _this_.rest = rest;
+        _this_.rows = Math.ceil(nb/cols);
+        _this_.rest = nb % cols;
 
         _this_.boxDim = _this_.width/cols - 2*_this_.border;
-            
+        
+        //Recurses if the height of the resulting grid is greater than the settings height
         if((_this_.boxDim+2*_this_.border)*_this_.rows > _this_.height){
-            _this_.calculate(cols + 1, nb);
+            calculate(cols + 1, nb);
         }
-    };
+    }
     
-    _this_.construct = function construct(){
-        //We construct the virtual array of items 
-        //We also construct the dom before it is appended so that all dom related stuff is done at once, no reflow
+    //Constructs the virtual array of items 
+    //Constructs the dom before it is appended so that all dom operations are done at once, no reflow
+    function construct(){
         for(var j = 1; j <= _this_.rows; j++){
-            //We populate rows
+            //Populates rows
             var row = $row.clone(),
-            //We treat the first row differently to fill it with the remaining boxes
+            //Treats the first row differently to fill it with the remaining boxes
             cols = _this_.rest && j==1 ? _this_.rest : _this_.cols;
 
             for(var k = 1; k <= cols; k++){
-                //We populate columns
+                //Populates columns
                 var clone = $box.clone(),
                 index = _this_.items.length,
                 item = {
@@ -125,28 +129,32 @@ function Grid(settings){
             $boxes = $boxes.add(row);
         }
 
-        //When the _this_ is finally pre-computed and ready we add it to the dom
+        //Adds the grid dom elements to the grid container when the grid is finally pre-computed and ready 
         _this_.node.append($boxes);
-    };
+    }
     
-    _this_.style = function style(){
+    //Sets the grid dimensions on the dom elements
+    function style(){
         _this_.node.width(_this_.width);
         _this_.node.height(_this_.height);
-        //We set the height and width of the boxes with the computed dimensions
         $box.width(_this_.boxDim);
         $box.height(_this_.boxDim);
         $box.css('border-width', _this_.border);
-    };
+    }
+    
+    //>>Start
     
     function init(){
-        //>>Start
-        //We start by computing the rendered _this_ recursively, we want at minimum 2 columns, uh-ho it's a _this_ ! 
-        _this_.calculate(2, _this_.nb_items);
-        _this_.style();
-        _this_.construct();
+        //We start by computing the rendered grid recursively, we want at minimum 2 columns, since it's a grid
+        calculate(2, _this_.nb_items);
+        //Then we style the html elements forming the grid by setting the grid dimensions
+        style();
+        //Finally we construct the html 
+        construct();
     }
     
     //Start
     init();
     
 }
+}(this, this.jQuery));

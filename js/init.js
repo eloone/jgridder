@@ -1,9 +1,8 @@
 var grid = new Grid({
-    width : 'hgjh',
+    width : 200,
     height : 200,
     border : 1,
-    nb_items : 49,
-    jhjh:2
+    nb_items : 49
 });
 
 $('body').append(grid.node);
