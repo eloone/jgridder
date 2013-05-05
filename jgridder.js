@@ -2,77 +2,93 @@
 
 function Debug(){
     var _this_ = this,
-        env = 'dev';
-    
-    if(!console){
-        return;
+        //env should be made accessible from a custom conf before this script
+        env = env || 'dev';
+
+    if(typeof console === 'undefined'){
+        _this_.exec = function(){
+            return null;
+        }
+
+        return _this_;
     }
 
-    for(var prop in console){
-        var method = console[prop];
+    _this_.exec = function(){
+        var args = [].slice.call(arguments),
+        method = args.slice(0,1)[0],
+        nextArgs = ['[debug in '+_this_.name+']'].concat(args.slice(1));
 
-        _this_[prop] = (function(m){
-            return function(args){
-                var args = [].slice.call(arguments);
-                args.splice(0,0, '[debug in '+_this_.name+']');
-                m.apply(console, args);
+        if(typeof(console[method]) === 'function'){
+            console[method].apply(console, nextArgs);
+        }
+        else{
+            if(typeof(_this_[method] === 'function')){
+                _this_[method].apply(_this_, nextArgs);
             }
-        })(method);
+        }
     }
-    
+
+    //Should be a callback ?
     _this_.printSignature = function printSignature(){
-        _this_.log('Function '+_this_.name +' signature is :');
-        _this_.log(_this_.signature);
+        _this_.exec('log','Function '+_this_.name +' signature is :');
+        _this_.exec('log',_this_.signature);
     }
-    
+
     for(var method in _this_){
-        if(_this_.hasOwnProperty(method)){
+        if(_this_.hasOwnProperty(method) && typeof _this_[method] === 'function'){
+            //Should be parameters
             if(env == 'prod' || env == 'preprod'){
                 _this_[method]  = function(){
-                    return;
+                    return null;
                 }
             }
         }
     }
-    
+
     return _this_;
 }
 
 window.Grid = function Grid(settings){
     var _this_ = this;
-    
+
     _this_.signature = {
         width : '(int) in px',
         height : '(int) in px',
         border : '(int) in px',
         nb_items : '(int)'
     };
-    
+
     _this_.name = arguments.callee.name;
-    
+
+    //>>Error handling
+
     var debug = Debug.call(_this_);
 
     if(!settings){
-        debug.error('Missing settings argument');
-        debug.printSignature();
+        debug.exec('error','Missing settings argument');
+        debug.exec('printSignature');
         return;
     }
-    
+
     for(var i in _this_.signature){
         if(isNaN(settings[i])){
-                debug.error('Property '+i+' is not a number.');
-                debug.printSignature();              
+                debug.exec('error', 'Property '+i+' is not a number');
+                debug.exec('printSignature');
+            return;
+        }
+        if(!isNaN(settings[i]) && settings[i] < 0){
+            debug.exec('error', 'Property '+i+' must not be negative');
             return;
         }
     }
-   
+
    //>>Settings
-   
+
    var $container = $('<div class="grid"/>'),
     $box = $('<li class="box"/>'),
     $row = $('<ul class="row"/>'),
     $boxes = $([]);
-    
+
     _this_.width = settings.width;
     _this_.height = settings.height;
     _this_.nb_items = settings.nb_items;
@@ -86,23 +102,27 @@ window.Grid = function Grid(settings){
     _this_.rest = null;
 
     //>>Functions
-    
+
     //Computes the dimensions of the rendered grid
     function calculate(cols, nb){
-        
+
         _this_.cols = cols;
         _this_.rows = Math.ceil(nb/cols);
         _this_.rest = nb % cols;
 
         _this_.boxDim = _this_.width/cols - 2*_this_.border;
-        
+
+        if(_this_.boxDim <= 1){
+            debug.exec('warn', 'Dimensions of the boxes are too small to be seen');
+        }
+
         //Recurses if the height of the resulting grid is greater than the settings height
         if((_this_.boxDim+2*_this_.border)*_this_.rows > _this_.height){
             calculate(cols + 1, nb);
         }
     }
-    
-    //Constructs the virtual array of items 
+
+    //Constructs the virtual array of items
     //Constructs the dom before it is appended so that all dom operations are done at once, no reflow
     function construct(){
         for(var j = 1; j <= _this_.rows; j++){
@@ -129,10 +149,10 @@ window.Grid = function Grid(settings){
             $boxes = $boxes.add(row);
         }
 
-        //Adds the grid dom elements to the grid container when the grid is finally pre-computed and ready 
+        //Adds the grid dom elements to the grid container when the grid is finally pre-computed and ready
         _this_.node.append($boxes);
     }
-    
+
     //Sets the grid dimensions on the dom elements
     function style(){
         _this_.node.width(_this_.width);
@@ -141,20 +161,20 @@ window.Grid = function Grid(settings){
         $box.height(_this_.boxDim);
         $box.css('border-width', _this_.border);
     }
-    
+
     //>>Start
-    
+
     function init(){
         //We start by computing the rendered grid recursively, we want at minimum 2 columns, since it's a grid
         calculate(2, _this_.nb_items);
         //Then we style the html elements forming the grid by setting the grid dimensions
         style();
-        //Finally we construct the html 
+        //Finally we construct the html
         construct();
     }
-    
+
     //Start
     init();
-    
+
 }
 }(this, this.jQuery));

@@ -2,8 +2,8 @@ var settings = {
     width : 200,
     height : 300,
     border : 1,
-    nb_items : 87
-}
+    nb_items : 92
+};
 
 for(var i in settings){
     $('input[name="'+i+'"]').val(settings[i]);
