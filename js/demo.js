@@ -12,13 +12,13 @@ for(var i in settings){
 computeGrid(settings);
 
 $('input').on('change', function(){
-    
-    settings = {
+
+    var settings = {
         width : $('input[name="width"]').val(),
         height : $('input[name="height"]').val(),
         border : $('input[name="border"]').val(),
         nb_items : $('input[name="nb_items"]').val()
-    }
+    };
     
     computeGrid(settings);
 });
