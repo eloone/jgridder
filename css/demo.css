@@ -41,7 +41,7 @@ input{
     color:#EA6E06;
     text-decoration:underline;
     padding-left:30px;
-    background:url(../../icons/github_orange.png) no-repeat;
+    background:url(/media/img/github_orange.png) no-repeat;
     background-size:contain;
     float:right;
 }

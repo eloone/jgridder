@@ -105,11 +105,9 @@ window.Grid = function Grid(settings){
 
     //Computes the dimensions of the rendered grid
     function calculate(cols, nb){
-
         _this_.cols = cols;
         _this_.rows = Math.ceil(nb/cols);
         _this_.rest = nb % cols;
-
         _this_.boxDim = _this_.width/cols - 2*_this_.border;
 
         if(_this_.boxDim <= 1){
@@ -165,8 +163,12 @@ window.Grid = function Grid(settings){
     //>>Start
 
     function init(){
-        //We start by computing the rendered grid recursively, we want at minimum 2 columns, since it's a grid
-        calculate(2, _this_.nb_items);
+        //We evaluate the optimum number of columns to get a fitting height
+        var cols = Math.ceil(Math.sqrt(_this_.width*_this_.nb_items/_this_.height));
+
+        //Then we calculate the grid. It will recurse if the height doesn't fit
+        calculate(cols, _this_.nb_items);
+
         //Then we style the html elements forming the grid by setting the grid dimensions
         style();
         //Finally we construct the html
