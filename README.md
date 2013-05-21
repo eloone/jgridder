@@ -78,7 +78,7 @@ var grid = new Grid({
           width : 85,
           height : 200,
           border : 1,
-          nb_items : totalItems
+          nb_items : 47
       });
 ```
 will return an object of this structure :
@@ -87,6 +87,7 @@ will return an object of this structure :
 {
   node : '[object]', //the jquery node for the grid container
   items : [
+   ...
     {
       node : '[object]', //jquery node for a box in the grid,
       index : '[int]' //index of the box in the grid
