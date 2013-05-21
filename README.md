@@ -120,3 +120,6 @@ and an html of this structure :
 </div>
 
 ```
+## License
+
+BSD-style. See the LICENSE file.
