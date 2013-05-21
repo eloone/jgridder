@@ -86,7 +86,7 @@ will return an object of this structure :
 ```js
 {
   node : '[object]', //the jquery node for the grid container => $('.grid')
-  items : [
+  items : [ //array of all the boxes in the grid
    ...
     {
       node : '[object]', //jquery node for a box in the grid, => $('.box')
