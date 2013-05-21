@@ -20,7 +20,7 @@ The css :
 `<link href="https://raw.github.com/eloone/jgridder/master/css/grid.css" rel="stylesheet"></link>`
 
 Take example on the 'test' folder of this repository. 
-Or directly see <http://eloone.net/jgridder/test> for a straightforward implementation.
+Or directly view source on <http://eloone.net/jgridder/test> for a straightforward implementation.
 
 ## Usage
 Once you have followed the <a href="#requirements">requirements</a>, 
