@@ -120,6 +120,9 @@ and an html of this structure :
 </div>
 
 ```
+## Beyond the code
+http://machinesaredigging.com/2013/05/21/jgridder-how-to-fit-elements-in-a-sized-grid/
+
 ## License
 
 BSD-style. See the LICENSE file.
