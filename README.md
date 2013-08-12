@@ -13,7 +13,7 @@ To get this script working include the following in your webpage :
 The javascript files :
 
  `<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>`
- `<script src="https://raw.github.com/eloone/jgridder/master/jgridder.js"></script>`
+ `<script src="http://eloone.github.io/jgridder/jgridder.js"></script>`
  
 The css :
 
