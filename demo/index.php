@@ -25,7 +25,7 @@
             <a href="https://github.com/eloone/jgridder/" class="github_link">https://github.com/eloone/jgridder/</a>
         </div>
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="../jgridder.js"></script>
+        <script src="http://eloone.github.io/jgridder/jgridder.js"></script>
         <script src="../js/demo.js"></script>
     </body>
 </html>
