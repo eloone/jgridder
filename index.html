@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Jgridder by eloone</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Jgridder</h1>
+        <h2>UI component that fits elements in a sized html grid</h2>
+        <a href="https://github.com/eloone/jgridder" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="jgridder" class="anchor" href="#jgridder"><span class="octicon octicon-link"></span></a>JGRIDDER</h1>
+
+<h2>
+<a name="pitch" class="anchor" href="#pitch"><span class="octicon octicon-link"></span></a>Pitch</h2>
+
+<p>jgridder is a UI javascript component that fits a number of elements in a sized html grid. It uses jQuery. </p>
+
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p><a href="http://eloone.net/jgridder/demo/">http://eloone.net/jgridder/demo/</a></p>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>To get this script working include the following in your webpage :</p>
+
+<p>The javascript files :</p>
+
+<p><code>&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;</code>
+ <code>&lt;script src="https://raw.github.com/eloone/jgridder/master/jgridder.js"&gt;&lt;/script&gt;</code></p>
+
+<p>The css :</p>
+
+<p><code>&lt;link href="https://raw.github.com/eloone/jgridder/master/css/grid.css" rel="stylesheet"&gt;&lt;/link&gt;</code></p>
+
+<p>Take example on the 'test' folder of this repository. 
+Or directly view source on <a href="http://eloone.net/jgridder/test">http://eloone.net/jgridder/test</a> for a straightforward implementation.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Once you have followed the <a href="#requirements">requirements</a>, 
+you can put this in your javascript file to implement the UI component :</p>
+
+<p>Simple implementation :</p>
+
+<div class="highlight"><pre><span class="c1">//This will just draw the grid</span>
+    <span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Grid</span><span class="p">({</span>
+          <span class="nx">width</span> <span class="o">:</span> <span class="mi">85</span><span class="p">,</span>
+          <span class="nx">height</span> <span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+          <span class="nx">border</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nx">nb_items</span> <span class="o">:</span> <span class="mi">47</span>
+      <span class="p">});</span>
+
+      <span class="c1">//When the grid is finally pre-computed and ready we add it to the dom</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">grid</span><span class="p">.</span><span class="nx">node</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Example with a click event on each box :</p>
+
+<div class="highlight"><pre>      <span class="kd">var</span> <span class="nx">totalItems</span> <span class="o">=</span> <span class="mi">47</span><span class="p">,</span>
+      <span class="nx">grid</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Grid</span><span class="p">({</span>
+           <span class="nx">width</span> <span class="o">:</span> <span class="mi">85</span><span class="p">,</span>
+          <span class="nx">height</span> <span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+          <span class="nx">border</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nx">nb_items</span> <span class="o">:</span> <span class="nx">totalItems</span>
+      <span class="p">});</span>
+
+      <span class="c1">//Click handler when a box is clicked</span>
+      <span class="kd">function</span> <span class="nx">onClick</span><span class="p">(){</span>    
+          <span class="nx">alert</span><span class="p">(</span><span class="s1">'click on a box'</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="c1">//Adding a click event on each box</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+          <span class="nx">grid</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">node</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span><span class="nx">onClick</span><span class="p">,</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">items</span><span class="p">[</span><span class="nx">j</span><span class="p">]));</span>
+      <span class="p">}</span>
+
+      <span class="c1">//When the grid is finally pre-computed and ready we add it to the dom</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">grid</span><span class="p">.</span><span class="nx">node</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="structure" class="anchor" href="#structure"><span class="octicon octicon-link"></span></a>Structure</h2>
+
+<p>This script only takes care of generating the grid. </p>
+
+<p>If you need to interact with the elements in the grid use the object that it returns :</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Grid</span><span class="p">({</span>
+          <span class="nx">width</span> <span class="o">:</span> <span class="mi">85</span><span class="p">,</span>
+          <span class="nx">height</span> <span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+          <span class="nx">border</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nx">nb_items</span> <span class="o">:</span> <span class="mi">47</span>
+      <span class="p">});</span>
+</pre></div>
+
+<p>will return an object of this structure :</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+  <span class="nx">node</span> <span class="o">:</span> <span class="s1">'[object]'</span><span class="p">,</span> <span class="c1">//the jquery node for the grid container =&gt; $('.grid')</span>
+  <span class="nx">items</span> <span class="o">:</span> <span class="p">[</span> <span class="c1">//array of all the boxes in the grid</span>
+   <span class="p">...</span>
+    <span class="p">{</span>
+      <span class="nx">node</span> <span class="o">:</span> <span class="s1">'[object]'</span><span class="p">,</span> <span class="c1">//jquery node for a box in the grid, =&gt; $('.box')</span>
+      <span class="nx">index</span> <span class="o">:</span> <span class="s1">'[int]'</span> <span class="c1">//index of the box in the grid</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nx">node</span> <span class="o">:</span> <span class="s1">'[object]'</span><span class="p">,</span> <span class="c1">//jquery node for a box in the grid,</span>
+      <span class="nx">index</span> <span class="o">:</span> <span class="s1">'[int]'</span> <span class="c1">//index of the box in the grid</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>and an html of this structure :</p>
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid"</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"row"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+  ...
+<span class="nt">&lt;/div&gt;</span>
+
+</pre></div>
+
+<h2>
+<a name="beyond-the-code" class="anchor" href="#beyond-the-code"><span class="octicon octicon-link"></span></a>Beyond the code</h2>
+
+<p><a href="http://machinesaredigging.com/2013/05/21/jgridder-how-to-fit-elements-in-a-sized-grid/">http://machinesaredigging.com/2013/05/21/jgridder-how-to-fit-elements-in-a-sized-grid/</a></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>BSD-style. See the LICENSE file.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/eloone/jgridder/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/eloone/jgridder/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/eloone/jgridder"></a> is maintained by <a href="https://github.com/eloone">eloone</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
