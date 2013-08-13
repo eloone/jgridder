@@ -17,7 +17,7 @@ The javascript files :
  
 The css :
 
-`<link href="https://raw.github.com/eloone/jgridder/master/css/grid.css" rel="stylesheet"></link>`
+`<link href="http://eloone.github.io/jgridder/css/grid.css" rel="stylesheet"></link>`
 
 Take example on the 'test' folder of this repository. 
 Or directly view source on <http://eloone.net/jgridder/test> for a straightforward implementation.
