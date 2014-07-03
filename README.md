@@ -67,6 +67,12 @@ Example with a click event on each box :
       //When the grid is finally pre-computed and ready we add it to the dom
       $('body').append(grid.node);
 ```
+
+View an example use:
+
+http://machinesaredigging.com/2013/04/18/my-first-time-in-america-ah/#slideshow-72157633096294423
+
+
 ## Structure
 
 This script only takes care of generating the grid. 
@@ -122,9 +128,6 @@ and an html of this structure :
 ```
 ## Design
 http://machinesaredigging.com/2013/05/21/jgridder-how-to-fit-elements-in-a-sized-grid/
-
-## Example
-http://machinesaredigging.com/2013/04/18/my-first-time-in-america-ah/#slideshow-72157633096294423
 
 ## License
 
